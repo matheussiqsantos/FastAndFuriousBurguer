@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package br.dev.matheus.FastAndFuriousBurguer.api.controller;
 
 import br.dev.matheus.FastAndFuriousBurguer.domain.model.Produto;
@@ -20,7 +17,7 @@ public class ProdutoController
     @Autowired
     private ProdutoRepository produtoRepository;
     
-    @GetMapping("/produto")
+    @GetMapping("/produtos")
     public List<Produto> listas()
     {
         return produtoRepository.findAll();
