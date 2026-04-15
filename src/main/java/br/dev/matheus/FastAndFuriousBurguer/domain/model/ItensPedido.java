@@ -7,16 +7,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-/**
- *
- * @author sesi3dib
- */
 @Entity
 public class ItensPedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private int qtd;
     private double valUnit;
@@ -24,11 +20,11 @@ public class ItensPedido {
     public ItensPedido() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -48,7 +44,7 @@ public class ItensPedido {
         this.valUnit = valUnit;
     }
 
-    public ItensPedido(long id, int qtd, double valUnit) {
+    public ItensPedido(Long id, int qtd, double valUnit) {
         this.id = id;
         this.qtd = qtd;
         this.valUnit = valUnit;

@@ -5,12 +5,12 @@
 package br.dev.matheus.FastAndFuriousBurguer.domain.repository;
 
 import br.dev.matheus.FastAndFuriousBurguer.domain.model.Produto;
-import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     
-    List<Produto> findByNome(String nome);
+    Optional<Produto> findByNome(String nome);
 }

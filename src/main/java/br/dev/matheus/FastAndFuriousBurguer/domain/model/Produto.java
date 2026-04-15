@@ -1,6 +1,8 @@
 package br.dev.matheus.FastAndFuriousBurguer.domain.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -10,12 +12,27 @@ public class Produto {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     
     
     private String nome;
-    private double preco;
+    private Double preco;
     private String ingredientes;
+    
+    @Enumerated(EnumType.STRING)
+    private CategoriaProduto categoria;
+
+    public Produto(CategoriaProduto categoria) {
+        this.categoria = categoria;
+    }
+
+    public CategoriaProduto getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(CategoriaProduto categoria) {
+        this.categoria = categoria;
+    }
 
     @Override
     public int hashCode() {
@@ -42,18 +59,18 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(long id, String nome, double preco, String ingredientes) {
+    public Produto(Long id, String nome, Double preco, String ingredientes) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
         this.ingredientes = ingredientes;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -65,11 +82,11 @@ public class Produto {
         this.nome = nome;
     }
 
-    public double getPreco() {
+    public Double getPreco() {
         return preco;
     }
 
-    public void setPreco(double preco) {
+    public void setPreco(Double preco) {
         this.preco = preco;
     }
 
