@@ -6,8 +6,11 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 
 @Entity
+@Table(name = "produto")
 public class Produto {
     
     @Id
@@ -17,14 +20,12 @@ public class Produto {
     
     private String nome;
     private Double preco;
-    private String ingredientes;
+    private String descricao;
     
     @Enumerated(EnumType.STRING)
     private CategoriaProduto categoria;
-
-    public Produto(CategoriaProduto categoria) {
-        this.categoria = categoria;
-    }
+    
+   
 
     public CategoriaProduto getCategoria() {
         return categoria;
@@ -59,11 +60,12 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(Long id, String nome, Double preco, String ingredientes) {
+    public Produto(Long id, String nome, Double preco, String descricao, CategoriaProduto categoria) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
-        this.ingredientes = ingredientes;
+        this.descricao = descricao;
+        this.categoria = categoria;
     }
 
     public Long getId() {
@@ -90,11 +92,11 @@ public class Produto {
         this.preco = preco;
     }
 
-    public String getIngredientes() {
-        return ingredientes;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setIngredientes(String ingredientes) {
-        this.ingredientes = ingredientes;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }

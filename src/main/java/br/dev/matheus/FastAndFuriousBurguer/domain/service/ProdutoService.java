@@ -32,8 +32,8 @@ public class ProdutoService {
             produtoAtual.setPreco(dadosNovos.getPreco());
         }
 
-        if (dadosNovos.getIngredientes() != null) {
-            produtoAtual.setIngredientes(dadosNovos.getIngredientes());
+        if (dadosNovos.getDescricao() != null) {
+            produtoAtual.setDescricao(dadosNovos.getDescricao());
         }
 
         if (dadosNovos.getCategoria() != null) {
