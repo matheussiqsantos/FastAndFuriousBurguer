@@ -4,7 +4,9 @@
  */
 package br.dev.matheus.FastAndFuriousBurguer.domain.repository;
 
+import br.dev.matheus.FastAndFuriousBurguer.domain.model.CategoriaProduto;
 import br.dev.matheus.FastAndFuriousBurguer.domain.model.Produto;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,4 +15,5 @@ import org.springframework.stereotype.Repository;
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     
     Optional<Produto> findByNome(String nome);
+    List<Produto> findByCategoria(CategoriaProduto categoria);
 }

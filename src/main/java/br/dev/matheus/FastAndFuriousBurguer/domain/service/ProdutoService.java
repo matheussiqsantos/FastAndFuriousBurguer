@@ -5,6 +5,7 @@ import br.dev.matheus.FastAndFuriousBurguer.domain.model.Produto;
 import br.dev.matheus.FastAndFuriousBurguer.domain.repository.ProdutoRepository;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -44,6 +45,11 @@ public class ProdutoService {
     }
 
     public void excluir(Long id) {
+        if(!produtoRepository.existsById(id)) {
+            
+            throw new RuntimeException("Produto não encontrado para exclusão");
+        }
+
         produtoRepository.deleteById(id);
     }
 }

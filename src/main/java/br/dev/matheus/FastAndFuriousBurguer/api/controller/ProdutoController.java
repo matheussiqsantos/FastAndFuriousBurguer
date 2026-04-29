@@ -1,6 +1,7 @@
 
 package br.dev.matheus.FastAndFuriousBurguer.api.controller;
 
+import br.dev.matheus.FastAndFuriousBurguer.domain.model.CategoriaProduto;
 import br.dev.matheus.FastAndFuriousBurguer.domain.model.Produto;
 import br.dev.matheus.FastAndFuriousBurguer.domain.repository.ProdutoRepository;
 import br.dev.matheus.FastAndFuriousBurguer.domain.service.ProdutoService;
@@ -42,13 +43,18 @@ public class ProdutoController
     public ResponseEntity<Produto> listaid(
                             @PathVariable Long id)
     {
-               Optional<Produto> produto = produtoRepository.findById(id);
+        Optional<Produto> produto = produtoRepository.findById(id);
        
         if (produto.isPresent()) {
             return ResponseEntity.ok(produto.get());
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+    
+    @GetMapping("produtos/categoria/{categoria}")
+    public List<Produto>listarcat(@PathVariable CategoriaProduto categoria) {
+        return produtoRepository.findByCategoria(categoria);
     }
     
     @PostMapping("/produtos")
@@ -74,17 +80,9 @@ public class ProdutoController
     
     @DeleteMapping("produtos/{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
-        
-        if(!produtoRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-        
+               
         produtoService.excluir(id);
         return ResponseEntity.noContent().build();
     }
-    
-    
-    
-    
-    
+     
 }
