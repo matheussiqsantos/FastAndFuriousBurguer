@@ -33,6 +33,9 @@ public class Pedido {
 
     @Column(name = "nome")
     private String nome;
+    
+    @Column(name = "preco") 
+    private Double preco;
 
     @Column(name = "data_aberto")
     private LocalDateTime data_aberto;
@@ -46,13 +49,14 @@ public class Pedido {
     @Column(name = "data_cancelado")
     private LocalDateTime data_cancelado;
 
-    public Pedido(Long id, String cpf, String nome, StatusPedido status,
+    public Pedido(Long id, String cpf, String nome, StatusPedido status, Double preco,
             LocalDateTime data_aberto, LocalDateTime data_pronto, LocalDateTime data_entregue, LocalDateTime data_cancelado) {
 
         this.id = id;
         this.cpf = cpf;
         this.nome = nome;
         this.status = status;
+        this.preco = preco;
         this.data_aberto = data_aberto;
         this.data_pronto = data_pronto;
         this.data_entregue = data_entregue;
@@ -64,6 +68,14 @@ public class Pedido {
 
     public Long getId() {
         return id;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
     }
 
     public List<ItensPedido> getItens() {

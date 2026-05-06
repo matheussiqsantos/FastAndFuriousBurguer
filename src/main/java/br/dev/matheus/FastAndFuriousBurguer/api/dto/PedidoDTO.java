@@ -10,13 +10,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "id", "nome", "cpf", "status", "data_aberto", "data_pronto", "data_entregue", "data_cancelado", "itens" })
+@JsonPropertyOrder({ "id", "nome", "cpf", "status", "preco", "data_aberto", "data_pronto", "data_entregue", "data_cancelado", "itens" })
 public class PedidoDTO {
     
     private Long id;
     private String cpf;
     private String nome;
     private StatusPedido status;
+    private Double preco;
     
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime data_aberto;
@@ -36,6 +37,7 @@ public class PedidoDTO {
         this.cpf = pedido.getCpf();
         this.nome = pedido.getNome();
         this.status = pedido.getStatus();
+        this.preco = pedido.getPreco();
         this.data_aberto = pedido.getData_aberto();
         this.data_pronto = pedido.getData_pronto();
         this.data_entregue = pedido.getData_entregue();
@@ -47,6 +49,10 @@ public class PedidoDTO {
 
     public Long getId() {
         return id;
+    }
+
+    public Double getPreco() {
+        return preco;
     }
 
     public String getCpf() {

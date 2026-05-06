@@ -22,13 +22,13 @@ public class PedidoService {
 
     @Transactional
     public Pedido emitir(Pedido pedido) {
-
         pedido.setStatus(StatusPedido.ABERTO);
         pedido.setData_aberto(LocalDateTime.now());
 
+        final double[] totalAcumulado = {0.0}; // Usei um array de uma posição para fazer o cálculo do valor do pedido
+
         if (pedido.getItens() != null) {
             pedido.getItens().forEach(item -> {
-
                 if (item.getProduto() == null || item.getProduto().getId() == null) {
                     throw new RuntimeException("É necessário informar o ID do produto para cada item.");
                 }
@@ -39,8 +39,12 @@ public class PedidoService {
                 item.setPedido(pedido);
                 item.setProduto(produto);
                 item.setValUnit(produto.getPreco());
+
+                totalAcumulado[0] += (item.getValUnit() * item.getQtd());
             });
         }
+
+        pedido.setPreco(totalAcumulado[0]);
 
         return pedidoRepository.save(pedido);
     }
@@ -87,14 +91,14 @@ public class PedidoService {
         // 4. Salva o pedido com as alterações parciais ou totais
         return pedidoRepository.save(pedidoAtual);
     }
-    
+
     @Transactional
     public Pedido atualizarStatus(Long id, StatusPedido novoStatus) {
         Pedido statusPedidoAtt = pedidoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
-        
+
         statusPedidoAtt.setStatus(novoStatus);
-        
+
         if (novoStatus == StatusPedido.PRONTO) {
             statusPedidoAtt.setData_pronto(LocalDateTime.now());
         } else if (novoStatus == StatusPedido.ENTREGUE) {
@@ -102,18 +106,18 @@ public class PedidoService {
         } else if (novoStatus == StatusPedido.CANCELADO) {
             statusPedidoAtt.setData_cancelado(LocalDateTime.now());
         }
-        
+
         return pedidoRepository.save(statusPedidoAtt);
     }
-    
+
     @Transactional
     public void excluir(Long id) {
-        
-        if(!pedidoRepository.existsById(id)) {
-            
-           throw new RuntimeException("Pedido não encontrado para exclusão");
+
+        if (!pedidoRepository.existsById(id)) {
+
+            throw new RuntimeException("Pedido não encontrado para exclusão");
         }
-        
+
         pedidoRepository.deleteById(id);
     }
 }
